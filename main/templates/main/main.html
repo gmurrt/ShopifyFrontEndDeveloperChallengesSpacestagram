@@ -1,0 +1,109 @@
+
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<br><br><br>
+
+<link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+
+
+<style>
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* truncate to 4 lines */
+  -webkit-line-clamp: 4;
+}
+#LikeButton {
+    transition: all .7s;
+}
+
+body {
+    background-color: rgb(241, 255, 244);
+}
+@keyframes burst{
+    0%,10%{
+        transform: scale(1);
+        opacity: .5;
+        color:lavender;
+    }
+    45%{
+        transform: scale(.2) rotate(30deg);
+        opacity: .75;
+    }
+    50%{
+        transform: scale(2) rotate(-37.5deg);
+        opacity: 1;
+        color: red;
+        text-shadow: 2px 2px 6px rgba(235, 9, 9, 0.5);
+    }
+    90%,95%{
+        transform: scale(1) rotate(10deg);
+        text-shadow: none;
+    }
+    100% {
+        transform: rotate(-2.5deg);
+    }
+
+  }
+.read-more {
+    transition: all .6s ease;
+    transform: scale(1);
+}
+.read-more:hover {
+    transform: scale(1.2) perspective(1px)
+}
+</style>
+
+
+<div class="flex items-center justify-center h-screen" style="margin-top: -70px; text-align: center;">
+  
+<script type="text/javascript">
+        var changable = true
+        function change()
+        {
+            if(changable == true){
+                document.getElementById("LikeButton").className = "fas fa-heart";
+                document.getElementById("LikeButton").style = "color: red; text-decoration: none;  cursor: pointer;       animation: .5s linear burst;";
+                changable = false
+            }
+            else if(changable == false){
+                document.getElementById("LikeButton").className = "far fa-heart";
+                document.getElementById("LikeButton").style = "color: black; text-decoration: none;  cursor: pointer;";
+                changable = true
+            }
+        }
+        var changable1 = true
+        function myFunction() {
+            if(changable1 == true){
+                var element = document.getElementById("myDIV");
+                element.classList.remove("line-clamp-4");
+                document.getElementById("ayo").value = "Read Less"
+                changable1 = false
+            }
+            else if(changable1 == false) {
+                var element = document.getElementById("myDIV");
+                element.classList.add("line-clamp-4");
+                document.getElementById("ayo").value = "Read More"
+                changable1 = true
+            }
+        }
+</script>
+
+<div class="max-w-xl rounded overflow-hidden shadow-lg" style="text-align: center; justify-content: center; background-color: white;">
+    <img class="w-full" src="{{daily_image}}" alt="Sunset in the mountains">
+    <div class="px-6 py-4">
+        <h6 class="text-gray-1200 text-lg">{{ date }} -- {{owner}} (Owner) </h6>
+      <div class="font-bold text-xl mb-2" style="margin-top: 5px;">{{title}}</div>
+      <p class="text-gray-1000 text-base line-clamp-4" id="myDIV">
+        {{explanation}}
+      </p>
+      <input onclick="myFunction()" value="Read More" type="button" id="ayo" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 read-more" style="margin-top: 10px;"></input>
+      <a id="LikeButton" class="far fa-heart" onclick="change()" style="text-decoration: none; color: black; cursor: pointer;"></a>
+    </div>
+</div>         
+
+</div>
+{% endblock %}
